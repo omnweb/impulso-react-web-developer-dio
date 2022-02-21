@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import logo from '../../assets/logo.svg'
-import { Container, Search, TextFieldContainer, Wrapper, SliderContainer, CarrouselTitle, Map} from './style.js'
+import { Container, Search, TextFieldContainer, Wrapper, SliderContainer, Carousel, CarrouselTitle, Map} from './style.js'
 import TextField, {Input} from '@material/react-text-field';
 import MaterialIcon from '@material/react-material-icon';
-import Slider from "react-slick";
+// import Slider from "react-slick";
 import Restaurante from '../../assets/restaurante-fake.png'
 import Card from '../../components/'
 const Home = () => {
@@ -36,13 +36,13 @@ const Home = () => {
                 </Search>
                 <SliderContainer>
                     <CarrouselTitle>Em sua Área</CarrouselTitle>
-                    <Slider {...settings}>
-                       <Card backgroundImage={Restaurante}/>
-                       <Card backgroundImage={Restaurante}/>
-                       <Card backgroundImage={Restaurante}/>
-                       <Card backgroundImage={Restaurante}/>
-                       <Card backgroundImage={Restaurante}/>
-                    </Slider>
+                    <Carousel {...settings}>
+                       <Card backgroundImage={Restaurante} title="Peixe frito"/>
+                       <Card backgroundImage={Restaurante} title="Feijoada"/>
+                       <Card backgroundImage={Restaurante} title="bobra"/>
+                       <Card backgroundImage={Restaurante} title="bregela"/>
+                       <Card backgroundImage={Restaurante} title="aglio"/>
+                    </Carousel>
                 </SliderContainer>
             </Container>
             <Map/>

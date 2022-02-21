@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-// import Slider from "react-slick";
+import Slider from "react-slick";
 
 
 export const Wrapper = styled.div`
@@ -41,11 +41,11 @@ export const CarrouselTitle = styled.h1`
     font-size: 24px;
     line-height:29px;
 `
-// export const Carousel = styled(Slider)`
-//     .slick-slide {
-//         margin-right: 16px;
-//     }
-// `
+export const Carousel = styled(Slider)`
+    .slick-prev:before, .slick-next:before  {
+        color:  ${(props) => props.theme.colors.text};
+    }
+`
 export const Map = styled.div`
    background-color: grey;
    width: 1200px;

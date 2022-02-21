@@ -8,8 +8,22 @@ export const Card = styled.div`
     background-image: url(${props => props.backgroundImage});
     background-size: cover;
     margin-left: 4px;
-`
 
-export  const ImageCard = ({backgroundImage}) => <Card  backgroundImage={backgroundImage} />
+    display:flex;
+    align-items: center;
+`
+export const Title = styled.span`
+    font-family: ${props => props.theme.font.regular};
+    color: ${(props) => props.theme.colors.white};
+    font-size: 12px;
+    margin-left: 4px;
+
+`
+const ImageCard = ({backgroundImage, title}) => (
+    <Card  backgroundImage={backgroundImage} >
+      <Title>{title}</Title>
+    </Card>
+)
+    
 
 export default ImageCard;
