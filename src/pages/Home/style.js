@@ -45,6 +45,7 @@ export const Carousel = styled(Slider)`
     .slick-prev:before, .slick-next:before  {
         color:  ${(props) => props.theme.colors.text};
     }
+    margin-bottom: 10%;
 `
 export const Map = styled.div`
    background-color: grey;

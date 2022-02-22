@@ -4,10 +4,11 @@ import { Container, Search, TextFieldContainer, Wrapper, SliderContainer, Carous
 import TextField, {Input} from '@material/react-text-field';
 import MaterialIcon from '@material/react-material-icon';
 // import Slider from "react-slick";
-import Restaurante from '../../assets/restaurante-fake.png'
-import Card from '../../components/'
+import Restaurante from '../../assets/restaurante-fake.png';
+import { Card, RestaurantCard, ModalInfo} from '../../components';
 const Home = () => {
-    const [inputValue, setInputValue] = useState('')
+    const [inputValue, setInputValue] = useState('');
+    const [modalOpened, setModalOpened] = useState(true)
     const settings = {
       dots: false,
       infinite: true,
@@ -17,7 +18,7 @@ const Home = () => {
       adaptiveHeight: true,
     };
     return (
-        <Wrapper>
+        <Wrapper> 
             <Container>
                 <Search>
                     <img src={logo} alt="logo" />
@@ -44,8 +45,11 @@ const Home = () => {
                        <Card backgroundImage={Restaurante} title="aglio"/>
                     </Carousel>
                 </SliderContainer>
+                <RestaurantCard name="Ovidio's Restorante" rate="****" address="Rua XV de Novembro 1359, Centro, Barra Bonita-SP"  restaurantImage={Restaurante} />
+                <RestaurantCard name="Marcus's Pizzarie" rate="**" address="Av PA. Afonso Pena de Carvalho, Jd. Das Acácias, Igaraçu do Tietê-SP" restaurantImage={Restaurante}/>
             </Container>
             <Map/>
+            <ModalInfo open={modalOpened} onClose={() => setModalOpened(!modalOpened)}/>
         </Wrapper>
     )
 }
