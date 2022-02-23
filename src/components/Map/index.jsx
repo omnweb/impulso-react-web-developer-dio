@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector} from 'react-redux';
-import {GoogleApiWrapper, Map, Marker} from 'google-maps-react';
+import {GoogleApiWrapper, Marker} from 'google-maps-react';
 
 import { Maps } from './style.js'
 
