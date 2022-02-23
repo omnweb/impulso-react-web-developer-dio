@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import '@material/react-text-field/dist/text-field.css';
 import '@material/react-material-icon/dist/material-icon.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+// import reportWebVitals from './reportWebVitals';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 
@@ -15,4 +15,4 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-reportWebVitals();
+// reportWebVitals();

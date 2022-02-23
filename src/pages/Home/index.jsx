@@ -1,14 +1,17 @@
 import React, {useState} from 'react'
 import logo from '../../assets/logo.svg'
-import { Container, Search, TextFieldContainer, Wrapper, SliderContainer, Carousel, CarrouselTitle, Map} from './style.js'
+import { Container, Search, TextFieldContainer, Wrapper, SliderContainer, Carousel, CarrouselTitle} from './style.js'
 import TextField, {Input} from '@material/react-text-field';
 import MaterialIcon from '@material/react-material-icon';
 // import Slider from "react-slick";
 import Restaurante from '../../assets/restaurante-fake.png';
-import { Card, RestaurantCard, ModalInfo} from '../../components';
+import { Card, RestaurantCard, ModalInfo, Map} from '../../components';
+
 const Home = () => {
     const [inputValue, setInputValue] = useState('');
+    const [query, setQuery] = useState('');
     const [modalOpened, setModalOpened] = useState(true)
+
     const settings = {
       dots: false,
       infinite: true,
@@ -17,6 +20,12 @@ const Home = () => {
       slidesToScroll: 4,
       adaptiveHeight: true,
     };
+
+    function handleKeyPress (e) {
+        if (e.key === 'Enter'){
+            setQuery(inputValue)
+        }
+    }
     return (
         <Wrapper> 
             <Container>
@@ -30,6 +39,7 @@ const Home = () => {
                             trailingIcon={<MaterialIcon role="button" icon="search"/>}
                             ><Input
                                 value={inputValue}
+                                onKeyPress={handleKeyPress}
                                 onChange={(e) => setInputValue(e.target.value)} placeholder='Search'
                             />
                         </TextField>
@@ -48,7 +58,7 @@ const Home = () => {
                 <RestaurantCard name="Ovidio's Restorante" rate="****" address="Rua XV de Novembro 1359, Centro, Barra Bonita-SP"  restaurantImage={Restaurante} />
                 <RestaurantCard name="Marcus's Pizzarie" rate="**" address="Av PA. Afonso Pena de Carvalho, Jd. Das Acácias, Igaraçu do Tietê-SP" restaurantImage={Restaurante}/>
             </Container>
-            <Map/>
+            <Map query={query}/>
             <ModalInfo open={modalOpened} onClose={() => setModalOpened(!modalOpened)}/>
         </Wrapper>
     )
