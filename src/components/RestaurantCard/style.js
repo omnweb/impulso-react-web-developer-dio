@@ -17,7 +17,7 @@ export const RestaurantInfo = styled.div`
     display: flex;
     flex-direction: column;
 `
-export const Name = styled.h2`
+export const Title = styled.h2`
     font-family: ${(props) => props.theme.font.regular};
     color:  ${(props) => props.theme.colors.text};
     font-weight: bold;
