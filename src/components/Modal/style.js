@@ -21,11 +21,13 @@ export const Dialog = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    max-height: calc(100% - 40%);
-    margin-top: 5%;
+    height: calc(100% - 85%);
+    margin-top: 15%;
     width: 500px;
     padding: 24px;
     background-color: ${ (props) => props.theme.colors.white};
     box-shadow: 0px 0px 32px rgba(78, 89, 131, 0.2);
     border-radius: 6px;
+    border: solid 5px ${(props) => props.theme.colors.background};
+
 `

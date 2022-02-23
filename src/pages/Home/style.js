@@ -33,7 +33,7 @@ export const SliderContainer = styled.section`
     align-self: center;
     margin: 0 10%;
 `
-export const CarrouselTitle = styled.h1`
+export const CarrouselTitle = styled.h2`
     font-family: ${(props) => props.theme.font.regular};
     color: ${(props) => props.theme.colors.text};
     font-weight:bold;
@@ -47,7 +47,22 @@ export const Carousel = styled(Slider)`
     }
     margin-bottom: 10%;
 `
-export const Map = styled.div`
-   background-color: grey;
-   width: 1200px;
+
+export const ModalTitle =styled.h2`
+    font-family: ${(props) => props.theme.font.regular};
+    color: ${(props) => props.theme.colors.text};
+    letter-space: .11px;
+    text-transform: none;
+    // line-height: 16px;
+    margin: 14px 0;
+    font-size: 24px;
+    font-weight: bold;
+`
+export const ModalContent =styled.p`
+    font-family: ${(props) => props.theme.font.regular};
+    color: ${(props) => props.theme.colors.text};
+    text-transform: none;
+    margin: 1% 0;
+    font-size: 14px;
+    font-weight: regular;
 `

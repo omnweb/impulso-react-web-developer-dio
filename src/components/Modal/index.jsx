@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Portal from './Portal'
 import {Overlay, Dialog} from './style.js'
 
-export const ModalInfo = ({children, open, onClose}) => {
+export const Modal = ({children, open, onClose}) => {
     useEffect(() => {
       function onEsc(e) {
           if (e.keyCode === 27) onClose();
@@ -31,4 +31,4 @@ export const ModalInfo = ({children, open, onClose}) => {
     )
 }
 
-export default ModalInfo;
+export default Modal;

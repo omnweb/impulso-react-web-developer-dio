@@ -9,18 +9,23 @@ import {
   SliderContainer,
   Carousel,
   CarrouselTitle,
+  ModalTitle,
+  ModalContent,
 } from "./style.js";
 import TextField, { Input } from "@material/react-text-field";
 import MaterialIcon from "@material/react-material-icon";
 // import Slider from "react-slick";
 import Restaurante from "../../assets/restaurante-fake.png";
-import { Card, RestaurantCard, ModalInfo, Map } from "../../components";
+import { Card, RestaurantCard, Modal, Map } from "../../components";
 
 const Home = () => {
   const [inputValue, setInputValue] = useState("");
-  const [query, setQuery] = useState("");
-  const [modalOpened, setModalOpened] = useState(true);
-  const { restaurants } = useSelector((state) => state.restaurants);
+  const [query, setQuery] = useState(null);
+  const [placeId, setPlaceId] = useState(null);
+  const [modalOpened, setModalOpened] = useState(false);
+  const { restaurants, restaurantsSelected } = useSelector(
+    (state) => state.restaurants
+  );
 
   const settings = {
     dots: false,
@@ -36,6 +41,11 @@ const Home = () => {
     if (e.key === "Enter") {
       setQuery(inputValue);
     }
+  }
+
+  function handleOpenModal(placeId) {
+    setModalOpened(true);
+    setPlaceId(placeId);
   }
 
   return (
@@ -66,7 +76,9 @@ const Home = () => {
               <Card
                 key={restaurant.place_id}
                 backgroundImage={
-                  restaurant.photos ? restaurant.photos[0].getUrl() : Restaurante
+                  restaurant.photos
+                    ? restaurant.photos[0].getUrl()
+                    : Restaurante
                 }
                 title={restaurant.name}
               />
@@ -74,12 +86,23 @@ const Home = () => {
           </Carousel>
         </SliderContainer>
         {restaurants.map((restaurant) => (
-          <RestaurantCard restaurant={restaurant} />
+          <RestaurantCard
+            key={restaurant.place_id}
+            restaurant={restaurant}
+            onClick={() => handleOpenModal(restaurant.place_id)}
+          />
         ))}
-        {/* <RestaurantCard name="Marcus's Pizzarie" rate="**" address="Av PA. Afonso Pena de Carvalho, Jd. Das Acácias, Igaraçu do Tietê-SP" restaurantImage={Restaurante}/> */}
       </Container>
-      <Map query={query} />
-      {/* <ModalInfo open={modalOpened} onClose={() => setModalOpened(!modalOpened)}/> */}
+      <Map query={query} placeId={placeId} />
+      <Modal
+        open={modalOpened}
+        onClose={() => setModalOpened(!modalOpened)}
+      >
+        <ModalTitle>{restaurantsSelected?.name}</ModalTitle>      
+        <ModalContent>{restaurantsSelected?.formatted_phone_number ? restaurantsSelected?.formatted_phone_number : '*Telefone de contato não informado'}</ModalContent>      
+        <ModalContent>{restaurantsSelected?.formatted_address ? restaurantsSelected?.formatted_address: '*Endereço não informado'}</ModalContent>      
+        <ModalContent>{restaurantsSelected?.opening_hours?.open_now ? 'Aberto no momento 👍': 'Fechado no momento 👎'}</ModalContent>      
+      </Modal>
     </Wrapper>
   );
 };

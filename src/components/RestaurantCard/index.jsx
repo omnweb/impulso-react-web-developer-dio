@@ -4,8 +4,8 @@ import {Restaurant, RestaurantInfo, Title, Address, RestaurantImage} from './sty
 import Restaurante from '../../assets/restaurante-fake.png';
 
 
-const RestaurantCard = ({restaurant, restaurante}) =>   (
-    <Restaurant>
+const RestaurantCard = ({restaurant, onClick}) =>   (
+    <Restaurant onClick={onClick}>
         <RestaurantInfo>
             <Title>{ restaurant.name }</Title>
             <ReactStars

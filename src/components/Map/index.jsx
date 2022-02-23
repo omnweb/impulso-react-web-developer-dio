@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 import {GoogleApiWrapper, Map, Marker} from 'google-maps-react';
 
-import { setRestaurants } from '../../redux/modules/restaurants.js'
+import { Maps } from './style.js'
+
+import { setRestaurants, setRestaurant } from '../../redux/modules/restaurants.js'
 
 export const MapContainer = (props)  => {
     const [map, setMap] = useState(null);
-    const { google, query }  = props;
+    const { google, query, placeId }  = props;
 
     const dispatch = useDispatch()
     const { restaurants } = useSelector((state) => state.restaurants)
@@ -15,7 +17,27 @@ export const MapContainer = (props)  => {
       if (query) {
         searchQuery(query);
       }      
-    });       
+    });  
+    useEffect(() => {
+      if (placeId) {
+        getRestaurantsById(placeId);
+      }      
+    });  
+
+     function getRestaurantsById (id) {
+       const service = new google.maps.places.PlacesService(map);
+
+      const request = {
+        placeId: id,
+        fields: ['name', 'opening_hours', 'formatted_address', 'formatted_phone_number']
+      }
+
+      service.getDetails(request, (place, status) => {
+        if(status === google.maps.places.PlacesServiceStatus.OK) {
+          dispatch(setRestaurant(place))
+        }
+      })
+     }   
     
 
     function searchQuery(query) {
@@ -29,7 +51,6 @@ export const MapContainer = (props)  => {
       }
       service.textSearch(request, (results, status) => {
         if(status === google.maps.places.PlacesServiceStatus.OK) {
-          console.log('textSearch', results)
           dispatch(setRestaurants(results))
         }
       })
@@ -41,12 +62,11 @@ export const MapContainer = (props)  => {
 
       const request = {
         location: center,
-        radius: '50000',
+        radius: '5000',
         type: ['restaurant'],
       }
       service.nearbySearch(request, (results, status) => {
         if(status === google.maps.places.PlacesServiceStatus.OK) {
-          console.log('nearbySearch', results)
           dispatch(setRestaurants(results))
         }
       })
@@ -57,7 +77,8 @@ export const MapContainer = (props)  => {
       searchNearby(map, map.center)
     }
     return (
-      <Map 
+      <Maps 
+        {...props}
         google={ google } 
         centerAroundCurrentLocation 
         onReady={onMapReady} 
@@ -73,7 +94,7 @@ export const MapContainer = (props)  => {
             }}
           />  
         ))}
-      </Map>
+      </Maps>
     )
 } 
 export default GoogleApiWrapper({
