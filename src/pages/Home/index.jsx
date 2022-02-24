@@ -14,9 +14,8 @@ import {
 } from "./style.js";
 import TextField, { Input } from "@material/react-text-field";
 import MaterialIcon from "@material/react-material-icon";
-// import Slider from "react-slick";
 import Restaurante from "../../assets/restaurante-fake.png";
-import { Card, RestaurantCard, Modal, Map, Loader } from "../../components";
+import { Card, RestaurantCard, Modal, Map, Loader, Skeleton } from "../../components";
 
 const Home = () => {
   const [inputValue, setInputValue] = useState("");
@@ -102,10 +101,22 @@ const Home = () => {
         open={modalOpened}
         onClose={() => setModalOpened(!modalOpened)}
       >
-        <ModalTitle>{restaurantsSelected?.name}</ModalTitle>      
-        <ModalContent>{restaurantsSelected?.formatted_phone_number ? restaurantsSelected?.formatted_phone_number : '*Telefone de contato não informado'}</ModalContent>      
-        <ModalContent>{restaurantsSelected?.formatted_address ? restaurantsSelected?.formatted_address: '*Endereço não informado'}</ModalContent>      
-        <ModalContent>{restaurantsSelected?.opening_hours?.open_now ? 'Aberto no momento 👍': 'Fechado no momento 👎'}</ModalContent>      
+        {restaurantsSelected ? (
+          <>
+            <ModalTitle>{restaurantsSelected?.name}</ModalTitle>      
+            <ModalContent>{restaurantsSelected?.formatted_phone_number ? restaurantsSelected?.formatted_phone_number : '*Telefone de contato não informado'}</ModalContent>      
+            <ModalContent>{restaurantsSelected?.formatted_address ? restaurantsSelected?.formatted_address: '*Endereço não informado'}</ModalContent>      
+            <ModalContent>{restaurantsSelected?.opening_hours?.isOpen ? 'Aberto no momento 👍': 'Fechado no momento 👎'}</ModalContent>      
+          </>
+          ): (
+            <>
+              <Skeleton width="10px" height="10px"/>  
+              <Skeleton width="10px" height="10px"/>  
+              <Skeleton width="10px" height="10px"/>  
+              <Skeleton width="10px" height="10px"/>  
+            </>
+          )
+        }
       </Modal>
     </Wrapper>
   );

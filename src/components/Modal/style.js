@@ -29,5 +29,4 @@ export const Dialog = styled.div`
     box-shadow: 0px 0px 32px rgba(78, 89, 131, 0.2);
     border-radius: 6px;
     border: solid 5px ${(props) => props.theme.colors.background};
-
 `
