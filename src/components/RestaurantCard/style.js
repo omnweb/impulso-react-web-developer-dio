@@ -45,8 +45,10 @@ export const RestaurantImage = styled.img`
     width:100px;
     height: 100px;
     border-radius:6px;
+    object-fit: cover;
+    display: ${props => props.imageLoad ? 'block' : 'none'}
+
     display: flex;
     justify-content: center;
     align-self: center;
-    object-fit: cover;
 `
