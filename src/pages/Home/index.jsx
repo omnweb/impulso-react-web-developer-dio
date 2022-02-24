@@ -16,7 +16,7 @@ import TextField, { Input } from "@material/react-text-field";
 import MaterialIcon from "@material/react-material-icon";
 // import Slider from "react-slick";
 import Restaurante from "../../assets/restaurante-fake.png";
-import { Card, RestaurantCard, Modal, Map } from "../../components";
+import { Card, RestaurantCard, Modal, Map, Loader } from "../../components";
 
 const Home = () => {
   const [inputValue, setInputValue] = useState("");
@@ -69,22 +69,26 @@ const Home = () => {
             </TextField>
           </TextFieldContainer>
         </Search>
-        <SliderContainer>
-          <CarrouselTitle>Em sua Área</CarrouselTitle>
-          <Carousel {...settings}>
-            {restaurants.map((restaurant) => (
-              <Card
-                key={restaurant.place_id}
-                backgroundImage={
-                  restaurant.photos
-                    ? restaurant.photos[0].getUrl()
-                    : Restaurante
-                }
-                title={restaurant.name}
-              />
-            ))}
-          </Carousel>
-        </SliderContainer>
+          {restaurants.length < 0 ? <Loader /> : (
+            <>
+              <SliderContainer>
+                <CarrouselTitle>Em sua Área</CarrouselTitle>
+                <Carousel {...settings}>
+                  {restaurants.map((restaurant) => (
+                    <Card
+                      key={restaurant.place_id}
+                      backgroundImage={
+                        restaurant.photos
+                          ? restaurant.photos[0].getUrl()
+                          : Restaurante
+                      }
+                      title={restaurant.name}
+                    />
+                  ))}
+                </Carousel>
+              </SliderContainer>
+            </>
+          )}
         {restaurants.map((restaurant) => (
           <RestaurantCard
             key={restaurant.place_id}
